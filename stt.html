@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech to Text - Creator X</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="container">
+
+    <a class="back-link" href="index.html">← Creator X पर वापस जाएँ</a>
+
+    <section class="tool-page">
+      <div class="badge">SPEECH TO TEXT</div>
+
+      <h1>Audio to Text</h1>
+
+      <p class="page-description">
+        अपनी audio file चुनें और AI से उसे लिखे हुए टेक्स्ट में बदलें।
+      </p>
+
+      <label for="audioFile">Audio file चुनें</label>
+
+      <input
+        id="audioFile"
+        class="file-input"
+        type="file"
+        accept="audio/*"
+      >
+
+      <p id="fileName" class="count-text">
+        अभी कोई audio file नहीं चुनी गई है।
+      </p>
+
+      <div id="previewBox" class="audio-preview hidden">
+        <p>चुनी गई audio सुनें:</p>
+        <audio id="audioPreview" controls></audio>
+      </div>
+
+      <button id="transcribeButton" class="generate-button">
+        📝 Text बनाएँ
+      </button>
+
+      <p id="sttMessage" class="message"></p>
+
+      <div id="textResult" class="transcript-result hidden">
+        <h3>आपका Text यहाँ आएगा</h3>
+        <p>
+          असली transcription के लिए अगले चरण में Speech-to-Text API जोड़ी जाएगी।
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const audioFile = document.getElementById("audioFile");
+    const fileName = document.getElementById("fileName");
+    const previewBox = document.getElementById("previewBox");
+    const audioPreview = document.getElementById("audioPreview");
+    const transcribeButton = document.getElementById("transcribeButton");
+    const sttMessage = document.getElementById("sttMessage");
+    const textResult = document.getElementById("textResult");
+
+    audioFile.addEventListener("change", function () {
+      const file = audioFile.files[0];
+
+      if (!file) {
+        fileName.textContent = "अभी कोई audio file नहीं चुनी गई है।";
+        previewBox.classList.add("hidden");
+        return;
+      }
+
+      fileName.textContent = "चुनी गई file: " + file.name;
+      audioPreview.src = URL.createObjectURL(file);
+
+      previewBox.classList.remove("hidden");
+      textResult.classList.add("hidden");
+      sttMessage.textContent = "";
+    });
+
+    transcribeButton.addEventListener("click", function () {
+      const file = audioFile.files[0];
+
+      if (!file) {
+        sttMessage.textContent = "पहले एक audio file चुनिए।";
+        textResult.classList.add("hidden");
+        return;
+      }
+
+      sttMessage.textContent =
+        "Demo तैयार है। असली transcription के लिए Speech-to-Text API अगली बार जोड़ेंगे।";
+
+      textResult.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>

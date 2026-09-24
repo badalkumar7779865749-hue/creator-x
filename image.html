@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Generator - Creator X</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="container">
+
+    <a class="back-link" href="index.html">← Creator X पर वापस जाएँ</a>
+
+    <section class="tool-page">
+      <div class="badge">AI IMAGE GENERATOR</div>
+
+      <h1>Image Generator</h1>
+
+      <p class="page-description">
+        अपने विचार को शब्दों में लिखें और AI से इमेज बनाइए।
+      </p>
+
+      <label for="imagePrompt">आप कैसी इमेज बनाना चाहते हैं?</label>
+
+      <textarea
+        id="imagePrompt"
+        class="text-input"
+        rows="6"
+        maxlength="800"
+        placeholder="उदाहरण: बारिश में पटना शहर की रात, सिनेमैटिक लाइटिंग, हाई क्वालिटी"
+      ></textarea>
+
+      <p id="imageCount" class="count-text">0 / 800 characters</p>
+
+      <label for="imageStyle">इमेज का स्टाइल चुनें</label>
+
+      <select id="imageStyle" class="select-input">
+        <option value="realistic">Realistic Photo</option>
+        <option value="digital-art">Digital Art</option>
+        <option value="anime">Anime Style</option>
+        <option value="3d">3D Render</option>
+        <option value="logo">Logo Design</option>
+      </select>
+
+      <label for="imageSize">इमेज का आकार चुनें</label>
+
+      <select id="imageSize" class="select-input">
+        <option value="square">Square — 1024 × 1024</option>
+        <option value="portrait">Portrait — 1024 × 1536</option>
+        <option value="landscape">Landscape — 1536 × 1024</option>
+      </select>
+
+      <button id="imageButton" class="generate-button">
+        🎨 Generate Image
+      </button>
+
+      <p id="imageMessage" class="message"></p>
+
+      <div id="imageResult" class="image-result hidden">
+        <h3>आपकी इमेज यहाँ दिखाई देगी</h3>
+        <div class="image-placeholder">🎨</div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const imagePrompt = document.getElementById("imagePrompt");
+    const imageCount = document.getElementById("imageCount");
+    const imageButton = document.getElementById("imageButton");
+    const imageMessage = document.getElementById("imageMessage");
+    const imageResult = document.getElementById("imageResult");
+
+    imagePrompt.addEventListener("input", function () {
+      imageCount.textContent = imagePrompt.value.length + " / 800 characters";
+    });
+
+    imageButton.addEventListener("click", function () {
+      const prompt = imagePrompt.value.trim();
+
+      if (!prompt) {
+        imageMessage.textContent = "पहले इमेज के लिए अपना prompt लिखिए।";
+        imageResult.classList.add("hidden");
+        return;
+      }
+
+      imageMessage.textContent =
+        "Demo तैयार है। अगले चरण में असली AI Image API से इमेज बनेगी।";
+
+      imageResult.classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Speech - Creator X</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="container">
+
+    <a class="back-link" href="index.html">← Creator X पर वापस जाएँ</a>
+
+    <section class="tool-page">
+      <div class="badge">TEXT TO SPEECH</div>
+
+      <h1>AI Voice Generator</h1>
+
+      <p class="page-description">
+        टेक्स्ट लिखें, आवाज़ चुनें और AI से ऑडियो बनाइए।
+      </p>
+
+      <label for="textInput">अपना टेक्स्ट लिखें</label>
+
+      <textarea
+        id="textInput"
+        class="text-input"
+        rows="7"
+        maxlength="1000"
+        placeholder="उदाहरण: नमस्ते, Creator X में आपका स्वागत है।"
+      ></textarea>
+
+      <p id="countText" class="count-text">0 / 1000 characters</p>
+
+      <label for="voiceSelect">आवाज़ चुनें</label>
+
+      <select id="voiceSelect" class="select-input">
+        <option value="rachel">Rachel — Female, English</option>
+        <option value="adam">Adam — Male, English</option>
+        <option value="bella">Bella — Female, English</option>
+        <option value="hindi">Hindi Voice — जल्द आ रही है</option>
+      </select>
+
+      <button id="generateButton" class="generate-button">
+        🎙️ Generate Voice
+      </button>
+
+      <p id="message" class="message"></p>
+
+      <div id="audioBox" class="audio-box hidden">
+        <h3>आपका ऑडियो तैयार है</h3>
+        <audio controls>
+          आपका ब्राउज़र ऑडियो प्लेयर सपोर्ट नहीं करता।
+        </audio>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const textInput = document.getElementById("textInput");
+    const countText = document.getElementById("countText");
+    const generateButton = document.getElementById("generateButton");
+    const message = document.getElementById("message");
+
+    textInput.addEventListener("input", function () {
+      countText.textContent = textInput.value.length + " / 1000 characters";
+    });
+
+    generateButton.addEventListener("click", function () {
+      const text = textInput.value.trim();
+
+      if (!text) {
+        message.textContent = "पहले टेक्स्ट लिखिए।";
+        return;
+      }
+
+      message.textContent =
+        "डेमो तैयार है। असली आवाज़ के लिए अगले चरण में server से ElevenLabs जोड़ा जाएगा।";
+    });
+  </script>
+</body>
+</html>
